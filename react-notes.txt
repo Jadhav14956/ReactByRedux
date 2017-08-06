@@ -1,0 +1,57 @@
+React component life cycle
+
+3. componentWillMount : 
+    - called before component mounting, render
+    - setting state in this method will not trigger render
+
+2. Constructor : 
+    - will be alled before component is mounted.
+    - super(this.props) should be called before otherwise props will be undefind
+    - constructor is the right place to initialize state. 
+    - you can use props to initialise state.
+
+1. Render : 
+    - return DOM/Custome element to render this component   
+    - return NULL / false to tell react you dont want this react component to render
+    - this function should be pure function. 
+        * should not modify component state
+        * should return same result every time.
+        * should not directly interact with browser(Do browser intyeraction in componentDidMount
+        * 
+    - render() will not be called if shouldComponentUpdate() returns false.
+
+4. componentDidMount :
+    - called after component is mounted
+    - this triggers render
+    - hence good place to get data from server endpoints
+
+5. componentWillReceiveProps : 
+    - NOTE : calling this.setState generally doesn't trigger componentWillReceiveProps.
+    - it is called only when props have been updated, not when they are initialised.
+    -  React may call this method even if the props have not changed, This may occur when the parent component causes your component to re-render.
+
+6. shouldComponentUpdate : 
+    - This method is not called for the initial render or when forceUpdate() is used.
+    - Returning false does not prevent child components from re-rendering when their state changes.
+    - default behaviour is to tell react that it can render this component with new changes.
+
+7. componentWillUpdate : 
+    - invoked immediately before rendering when new props or state are being received.
+    - Use this as an opportunity to perform preparation before an update occurs. 
+    - This method is not called for the initial render.
+    - Note that you cannot call this.setState().
+    - will not be invoked if shouldComponentUpdate() returns false.
+
+8. componentDidUpdate : 
+    - invoked immediately after updating occurs. 
+    - This method is not called for the initial render.
+    - a good place to do network requests.
+    -  will not be invoked if shouldComponentUpdate() returns false.
+
+ ******************************************************************************
+ setState : 
+    - this will render compoennt again unless, shouldComponentMount returns false.
+    - Request : a request rather than an immediate command to update the component.
+    - Batch Processing of updates : For better perceived performance, React may delay it, and then update several components in a single pass. React does not guarantee that the state changes are applied immediately.
+    - CallBack : use callback for setState, which this ensure state is updated by react.
+    - 
